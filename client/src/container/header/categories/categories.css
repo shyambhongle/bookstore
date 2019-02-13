@@ -1,0 +1,26 @@
+.Wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Container{
+  margin-top: 20px;
+  width: 18%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: grey;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+span{
+  display:inline-block;
+  cursor: pointer;
+  line-height: 28px;
+}
+span:hover{
+  color:black;
+}

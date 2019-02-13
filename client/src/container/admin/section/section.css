@@ -1,0 +1,39 @@
+.Section{
+  min-height: 50vh;
+  width: 100vw;
+  display: flex;
+  height: auto;
+  justify-content: space-evenly;
+}
+
+.ControlPanel{
+  width: 20%;
+  height: 85vh;
+  background-color: #232f3e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.ControlPanel>div{
+  margin: 1px 0;
+  padding: 20px 20px;
+  background-color: #1f2b38;
+  text-align: center;
+  color: white;
+}
+
+.visited:visited{
+  color: white;
+}
+
+
+.ControlPanel div:first-of-type{
+  margin-top: 0px;
+}
+
+.DisplayPannel{
+  width: 78%;
+  height: auto;
+  border-bottom: 1px solid #f5f5f6;
+}

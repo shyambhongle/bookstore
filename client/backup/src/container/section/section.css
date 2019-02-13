@@ -1,0 +1,79 @@
+
+
+.SectionWrapper{
+  width: 100vw;
+  margin: auto;
+  margin-top: 7px;
+}
+
+
+
+
+
+.Banner{
+  height: 53vh;
+  width: 100vw;
+  margin-top: 10px;
+}
+
+.Box1{
+  background-color: red;
+}
+
+.Box2{
+  background-color: blue;
+}
+
+
+.Box3{
+  background-color: green;
+}
+
+.Box4{
+  background-color: violet;
+}
+
+
+.AwardWinnig{
+  width: 90%;
+  margin: auto;
+  height: 50vh;
+  margin-top: 7vh;
+  display: flex;
+}
+
+.TagName{
+position: absolute;
+font-size: 1.2em;
+letter-spacing: 2px;
+padding: 5px 20px;
+}
+
+.Limited{
+  width: 90%;
+  margin: auto;
+  height: 50vh;
+  border:1px solid grey;
+  margin-top: 7vh;
+}
+
+.Featured{
+  width: 90%;
+  margin: auto;
+  height: 50vh;
+  border:1px solid grey;
+  margin-top: 7vh;
+  margin-bottom: 10px;
+}
+
+
+.BackTop{
+  width: 100vw;
+  height: 8vh;
+  background-color: #232F3E;
+  font-size: 1em;
+  color: white;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
