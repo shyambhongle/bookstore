@@ -87,6 +87,7 @@ nav ul li:first-of-type:hover .CategoryBox{
     margin: 20px 10px 20px 0;
     background-color: #F5F5F6;
     display: flex;
+    position: relative;
   }
 
 .SearchBox input{
@@ -100,6 +101,44 @@ nav ul li:first-of-type:hover .CategoryBox{
  border: 1px solid #D5D6D9;
  border-radius: 4px 0 0 4px;
  border-right: 0;
+}
+.SearchBox input:focus{
+ background-color: white;
+}
+
+.SearchContainer{
+  position: absolute;
+  min-height:20px;
+  width: 99%;
+  z-index: 100;
+  top: 40px;
+  background-color: white;
+  border: 1px solid #D5D6D9;
+  border-top: none;
+  text-decoration: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.SearchContainer li{
+  list-style: none;
+  margin-left: -25px;
+  text-transform:capitalize;
+}
+.SearchContainer li:hover{
+  cursor: pointer;
+}
+
+.TitleList{
+  color: grey;
+  font-size: 0.8em;
+}
+
+
+.AccountEmail{
+  color: grey;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .SearchImage{

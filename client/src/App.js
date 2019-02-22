@@ -10,11 +10,11 @@ import Login from './container/login/login';
 import {connect} from 'react-redux';
 import Admin from './container/admin/admin';
 import SearchProduct from './container/search/search.js';
+import Order from './container/order/order.js';
 import Nav from './container/nav/nav';
-
+import * as actionCreators from './action/index';
 import jwt_decode from 'jwt-decode';
 import store from './store/store';
-
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './action/authAction';
 
@@ -33,6 +33,7 @@ if (decoded.admin) {
   store.dispatch(setCurrentUser(decoded));
 
 }
+
   // Check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
@@ -45,7 +46,28 @@ if (decoded.admin) {
 
 
 class App extends Component {
+
+test1=true;
+test2=true;
+
+
+componentDidMount(){
+  if (localStorage.localcart && localStorage.localcart.length>0) {
+    let localstore=JSON.parse(localStorage.getItem('localcart'));
+    if (localstore.length>0) {
+      localstore.map(item=>{
+        return this.props.addItem(item);
+      })
+    }
+}
+}
+
+
+
+
+
   render() {
+
     return (
       <BrowserRouter>
       {!this.props.isadmin?<div>
@@ -53,6 +75,7 @@ class App extends Component {
       <Route path='/cart' exact component={Cart}/>
       <Route path='/'  component={Header}/>
       </Switch>
+      <Route path='/orders' exact component={Order}/>
       <Route path='/search' exact component={SearchProduct}/>
       <Route path='/navigation' exact component={Nav}/>
       <Route path='/register'exact component={Register}/>
@@ -69,9 +92,17 @@ class App extends Component {
 
 
 const mapStateToProps=state=>({
-  isadmin:state.admin.admin
+  isadmin:state.admin.admin,
+  auth:state.auth
+})
+
+const mapDispatchToProps=dispatch=>({
+  addcart:()=>{dispatch(actionCreators.authAddCart())},
+  removecart:()=>{dispatch(actionCreators.removeAuthCart())},
+  addItem:(payload)=>{dispatch(actionCreators.addToCart(payload))}
+
 })
 
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {addProduct} from './../../../../action/adminAction';
+import {addProduct} from './../../../../../action/adminAction';
 import classes from './addproduct.css';
 
 class AddProduct extends Component {

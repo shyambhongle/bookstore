@@ -16,6 +16,8 @@ const profile=require('./routes/profile');
 const cart=require('./routes/cart');
 const admin=require('./routes/admin');
 const search=require('./routes/search');
+const charge=require('./routes/checkout');
+const order=require('./routes/order');
 
 
 
@@ -47,6 +49,8 @@ app.use('/profile',profile);
 app.use('/cart',cart);
 app.use('/admin',admin);
 app.use('/products',search);
+app.use('/checkout',charge);
+app.use('/myorders',order);
 
 
 

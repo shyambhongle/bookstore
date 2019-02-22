@@ -1,0 +1,49 @@
+.SectionBox{
+  width: 100%;
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.NoOrders{
+  width: 20%;
+  margin: auto;
+  font-size: 1.8em;
+  padding-top: 20vh;
+  padding-bottom: 34vh;
+}
+
+.OrderTitle{
+  font-size: 1.5em;
+  width: 60%;
+  margin: auto;
+  padding: 25px;
+}
+
+.OuterOrder{
+align-items:flex-start;
+ min-height: 30vh;
+  width: 60%;
+  margin: 10px auto;
+  padding: 20px;
+  border: 1px solid #eaeaec;
+}
+
+.OrderNumber{
+  font-size: 1em;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+.Placed{
+  display: inline-block;
+  float: right;
+}
+.AmountPaid{
+  padding: 0px;
+  font-size: 1em;
+  display: inline-block;
+  float: right;
+  margin-top: -10px;
+}

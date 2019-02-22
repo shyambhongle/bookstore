@@ -24,6 +24,7 @@ this.props.homeProducts();
 
 
   render(){
+    let cartNull=[];
     var settings = {
      dots: true,
      autoplay:true
@@ -51,12 +52,14 @@ this.props.homeProducts();
 
       <div className={classes.AwardWinnig}>
       <div className={classes.TagName}>Award Wining</div>
-      <Products product={this.props.products.featured}/>
+      <Products product={this.props.products.featured}
+      cart={this.props.cartItems?this.props.cartItems:cartNull}/>
       </div>
 
       <div className={classes.Limited}>
       <div className={classes.TagName}>Limited Edition</div>
-      <Products product={this.props.products.limited}/>
+      <Products product={this.props.products.limited}
+      cart={this.props.cartItems?this.props.cartItems:cartNull}/>
       </div>
 
       <div className={classes.Featured}>

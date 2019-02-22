@@ -1,5 +1,5 @@
 import * as  actionType from './../action/actionType';
-
+import axios from 'axios';
 
 
 const initialState={
@@ -8,12 +8,16 @@ const initialState={
   totalItems:null
 }
 
+
 const cartReducer=(state=initialState,action)=>{
 switch (action.type) {
   case actionType.ADD_ITEM:
 
   let newCart={...state};
 
+
+
+console.log(action.payload);
 
 
   newCart.cartItems.push(action.payload);
@@ -35,13 +39,26 @@ switch (action.type) {
   },0)
 
 
+  if (action.payload.isauth) {
+    axios.post('/profile/addtocart',{payload:newCart.cartItems})
+        .then(res=>{console.log(res)});
+  };
+
   newCart.totalItems=newtotalItems;
-
-
-
-
+  localStorage.setItem('localcart', JSON.stringify(newCart.cartItems));
   return newCart;
 
+  case "REMOVE":
+  return action.payload;
+
+case "EMPTY_CART":
+
+let updatedCart={
+  cartItems:[],
+  cartItemsWithQuantities:null,
+  totalItems:null
+}
+return updatedCart;
   default:
   return state;
 }

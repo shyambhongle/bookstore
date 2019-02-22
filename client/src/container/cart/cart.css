@@ -89,7 +89,7 @@
 .PriceBox{
   display: inline-block;
   margin:18px;
-  width: 30%;
+  width: 28%;
   min-height: 20vh;
   border: 1px solid #eaeaec;
   border-radius: 5px;
@@ -128,7 +128,15 @@
 .TotalAmount{
   margin-top: 5px;
   color: #696b79;
+}
 
+.CheckoutButton{
+  padding-left: 40px;
+
+  width: 80%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .Footer{

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-
 import { SET_CURRENT_USER } from './actionType';
 
 // Register User
@@ -13,7 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login - Get User Token
-export const loginUser = (userData,history) => dispatch => {
+export const loginUser = (userData,history,testValidate) => dispatch => {
   axios
     .post('/login', userData)
     .then(res => {
@@ -27,14 +26,30 @@ export const loginUser = (userData,history) => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
 
+
+
       if (decoded.admin) {
         dispatch({type:"ADMIN",payload:true})
         dispatch(setCurrentUser(decoded));
-        history.push('/')
       }else{
+
         dispatch(setCurrentUser(decoded));
-        history.push('/')
+        if (testValidate) {
+          history.push('/cart')
+        }else {
+          axios.get('/profile/cartitems')
+                .then(res=>{
+                  if (res.data.length>0) {
+                    res.data.map(item=>{
+                      console.log(item);
+                    return  dispatch({type:"ADD_ITEM",payload:item});
+                    })
+                  }
+                })
+                history.push('/')
+        }
       }
+      axios.post('/profile').then(res=>{console.log("success");});
     })
     .catch(err =>{console.log(err.response);});
 };
@@ -51,6 +66,8 @@ export const setCurrentUser = decoded => {
 export const logoutUser = (data) => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem('jwtToken');
+  localStorage.removeItem('localcart');
+  dispatch({type:"EMPTY_CART"});
   // Remove auth header for future requests
   setAuthToken(false);
   if (data) {

@@ -16,6 +16,7 @@ if (props.product) {
             author={item.author}
             amount={item.price}
             id={item._id}
+            cart={props.cart}
             />
   })
 }

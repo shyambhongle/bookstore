@@ -5,48 +5,49 @@ const passport=require('passport');
 const Profile=require('./../models/profile');
 
 
-
-router.get('/myorder',passport.authenticate('jwt',{session:false}),(req,res)=>{
-  Profile.findOne({user:req.user._id})
+router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  Profile.findOne({user:req.user.id})
           .then(profile=>{
-            if (!profile) {
-              let newProfile=new Profile({
-                email:req.user.email,
-                user:req.user._id,
-                gender:req.user.gender
-              }).save().then(userProfile=>{
-              return res.json(userProfile)
-            });
-          }else{
-            return res.json(profile);
-          }
+            if (profile.length===0) {
+              const newProfile=new Profile({
+                user:req.user.id,
+                email:req.user.email
+              }).save();
+            }else {
+              console.log(profile);
+            }
           })
 });
 
-
-
-
-
+router.get('/cartitems',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  Profile.findOne({user:req.user.id})
+          .then(profile=>{
+            if (profile.cart.length>0) {
+              return res.json(profile.cart)
+            }else {
+              let some=[]
+              return res.json(some)
+            }
+          })
+})
 
 
 router.post('/addtocart',passport.authenticate('jwt',{session:false}),(req,res)=>{
-  Profile.findOne({user:req.user.id})
-          .then(profile=>{
-            if(profile){
-              console.log(req.body.id);
-              let newCart=[...profile.cart];
-              newCart.push(req.body.id)
+          Profile.findOneAndUpdate(
+            {user:req.user.id},
+            {$set:{cart:req.body.payload}},
+            {new:true}
+          ).then(newcart=>{res.json(newcart.cart)})
+})
 
-              Profile.findOneAndUpdate(
-                {user: req.user.id},
-                {$set: {cart:newCart}},
-                {new: true}
-              ).then(
-                profileCart=>{return res.json(profileCart)}
-              );
-            }
-          })
-     })//ends
+router.post('/removecart',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  Profile.findOneAndUpdate(
+    {user:req.user.id},
+    {$set:{cart:[]}},
+    {new:true}
+  ).then(newcart=>{res.json(newcart.cart)})
+})
+
 
 
 module.exports=router;

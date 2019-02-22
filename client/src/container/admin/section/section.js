@@ -3,7 +3,9 @@ import classes from './section.css';
 import {connect} from 'react-redux';
 import {addProduct} from './../../../action/adminAction';
 import {Route,NavLink} from 'react-router-dom';
-import AddProduct from './component/addproduct';
+import AddProduct from './component/addproduct/addproduct';
+import EditProduct from './component/editproduct/editproduct';
+
 
 class Section extends Component {
 
@@ -24,6 +26,8 @@ render(){
     </div>
     <div className={classes.DisplayPannel}>
       <Route path='/product'  component={AddProduct}/>
+      <Route path='/editproduct'  component={EditProduct}/>
+
     </div>
 
     </div>

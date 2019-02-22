@@ -5,6 +5,7 @@ import {categoryAction} from './../../../action/searchAction';
 import {withRouter} from 'react-router-dom';
 
 const Categories=(props)=>{
+  
     return(
       <div className={classes.Wrapper}>
       <div className={classes.Container}>

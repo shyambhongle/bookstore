@@ -2,7 +2,8 @@
 
 const inititialState={
   title:'',
-  products:[]
+  products:[],
+  items:[]
 }
 
 const searchProduct=(state=inititialState,action)=>{
@@ -12,6 +13,12 @@ const searchProduct=(state=inititialState,action)=>{
         ...state,
         products:[...action.payload],
         title:action.title
+      };
+      case "INPUT_SEARCH":
+
+      return {
+        ...state,
+       items:action.payload
       };
     default:
     return state;

@@ -46,10 +46,28 @@ if (req.user.id==="5c5f6f4f3ec16b0e5c4ebf96") {
   }).save().then(success=>{res.json({message:"success"})})
 
 }
+})
+
+router.post('/updateproduct',passport.authenticate('jwt',{session:false}),(req,res)=>{
+
+
+Book.findOneAndUpdate(
+  {_id:req.body.id},
+  {$set:{
+    title:req.body.title,
+    description:req.body.description,
+    price:req.body.price,
+    author:req.body.author,
+    category:[req.body.category],
+    tag:req.body.tag
+  }},
+  {new:true}
+).then(newBook=>{
+  res.json(newBook);
+})
 
 
 })
-
 
 
 module.exports=router;

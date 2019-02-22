@@ -1,5 +1,6 @@
 export {
-    addProduct
+    addProduct,
+    updateProduct
 } from './adminAction';
 export {
     registerUser,
@@ -8,7 +9,10 @@ export {
 } from './authAction';
 export {
     addToCart,
-    showCart
+    showCart,
+    removeItems,
+    authAddCart,
+    removeAuthCart
 } from './cartAction';
 export {
     homeProducts,
@@ -16,5 +20,11 @@ export {
 } from './productAction';
 export {
     categoryAction,
-    headerNav
+    headerNav,
+    inputSearch,
+    inputClick,
+    inputSearchClick
 } from './searchAction';
+export {
+  orderAction
+} from './orderAction';

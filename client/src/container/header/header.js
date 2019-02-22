@@ -12,9 +12,16 @@ import Categories from './categories/categories.js';
 
 class Header extends Component {
 
+state={
+  vis:false
+}
 
 render(){
-
+  let titleList=this.props.search.items.map((item,i)=>{
+    return <li key={i} className={classes.TitleList}
+    onClick={()=>{this.props.inputClick(item.id,item.title,this.props.history)}}>
+    {item.title.toLowerCase()}</li>;
+  })
       return(
       <div className={classes.HeaderBox}>
       <Link to="/" style={{textDecoration:"none"}}><div className={classes.CompanyName}><img src={books} alt="logo"/>
@@ -24,7 +31,7 @@ render(){
        <nav>
         <ul>
           <li>Categories
-          <div className={classes.CategoryBox}><Categories/>
+          <div className={classes.CategoryBox} ><Categories/>
           </div></li>
           <li onClick={(e)=>{this.props.navigate(e,this.props.history)}}>New Arrivals</li>
           <li onClick={(e)=>{this.props.navigate(e,this.props.history)}}>Best Sellers</li>
@@ -32,14 +39,26 @@ render(){
         </ul>
        </nav>
       </div>
-      <div className={classes.SearchBox}>
-      <input type="text" placeholder="Search"/>
-      <span className={classes.SearchImage}><img src={search} alt="searh"/></span>
+      <div className={classes.SearchBox} style={{
+        backgroundColor:this.state.vis?"white":"#F5F5F6"
+    }}>
+      <input type="text" placeholder="Search"
+      onChange={(e)=>{this.props.input(e)}}
+      onFocus={(e)=>{this.setState({vis:true})}}
+      onBlur={(e)=>{this.setState({vis:false})}}
+      />
+      <span className={classes.SearchImage}><img src={search}
+      onClick={()=>{this.props.searchClick(this.props.search,this.props.history)}} alt="searh"/></span>
+      {!titleList.length>0?null:
+      <div className={classes.SearchContainer}>
+      <ul>{titleList}</ul>
+      </div>}
       </div>
       <div className={classes.User}><img src={user} alt="user"/>
         {
         this.props.isauth.isAuthenticated?<div className={classes.isAuth}>
-          <div className={classes.MyOrders}>My Orders</div>
+        <div className={classes.AccountEmail}>{this.props.isauth.user.email}</div>
+          <Link to='/orders' style={{textDecoration:"none"}}><div className={classes.MyOrders}>My Orders</div></Link>
           <div onClick={()=>{this.props.logout()}} className={classes.Logout}>Logout</div>
           </div>:
           <div className={classes.Auth}>
@@ -63,13 +82,18 @@ render(){
 
 const mapStateToProps=state=>({
   cartItem:state.cart,
-  isauth:state.auth
+  isauth:state.auth,
+  search:state.search
 })
 
 const mapDispatchToProps = dispatch => {
     return {
         logout: () => dispatch(actionCreators.logoutUser()),
-        navigate:(e,history)=>dispatch(actionCreators.headerNav(e,history))
+        navigate:(e,history)=>dispatch(actionCreators.headerNav(e,history)),
+        input:(e)=>dispatch(actionCreators.inputSearch(e)),
+        inputClick:(id,title,history)=>dispatch(actionCreators.inputClick(id,title,history)),
+        searchClick:(id,history)=>dispatch(actionCreators.inputSearchClick(id,history))
+
     }
 };
 

@@ -1,17 +1,20 @@
 
 const initialState={
-  orders:null
+  orders:null,
+  totalAmount:null
 }
 
 
-const myorder=(state=initialState,action)=>{
+const order=(state=initialState,action)=>{
 
 switch (action.type) {
   case "MY_ORDER":
-  console.log(action.payload);
+
+
   return {
     ...state,
-    orders:action.payload
+    orders:action.payload.allOrders,
+    totalAmount:action.payload.totalAmount
   }
   default:
   return state;
@@ -22,4 +25,4 @@ switch (action.type) {
 }
 
 
-export default myorder;
+export default order;
